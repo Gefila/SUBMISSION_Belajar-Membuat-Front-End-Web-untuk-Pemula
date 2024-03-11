@@ -1,0 +1,64 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: poppins;
+}
+
+header {
+	display: flex;
+	justify-content: center;
+	padding: 1.5rem;
+}
+
+main {
+	width: 70%;
+	margin: 0 auto;
+}
+
+.input-section {
+	display: flex;
+	flex-direction: column;
+	background-color: burlywood;
+	padding: 1rem;
+}
+
+.input-section form {
+	display: flex;
+	flex-direction: column;
+}
+
+.input-section .title {
+	text-align: center;
+}
+
+.input-section form .input {
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem 0;
+}
+
+.input-section form .input input {
+	border: none;
+	padding: 0.5rem 0.2rem;
+}
+
+.input-section form .input-inline {
+	display: flex;
+	align-items: center;
+}
+
+.input-section form .input-inline input {
+	width: 1rem;
+	height: 1rem;
+	margin-left: 1rem;
+}
+
+.input-section form button {
+	margin-top: 1rem;
+	padding: 0.5rem 0.3rem;
+	width: 40%;
+	align-self: center;
+	background-color: blue;
+	border: 0;
+}
