@@ -62,3 +62,22 @@ main {
 	background-color: blue;
 	border: 0;
 }
+
+.book-shelf,
+#inCompleteBookShelfList {
+	background-color: antiquewhite;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 1rem;
+	width: 100%;
+}
+
+.book-wrapper {
+	padding: 1rem;
+	width: 50%;
+}
+
+.book {
+	padding: 2rem;
+	background-color: rgb(187, 187, 187);
+}
