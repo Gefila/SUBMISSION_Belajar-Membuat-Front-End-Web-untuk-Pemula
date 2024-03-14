@@ -69,7 +69,7 @@ function showBooks(booksObject) {
 	const icon = document.createElement("div");
 	icon.innerHTML = `
 	<i data-feather="repeat" id=""></i>
-	<i data-feather="check" id="done"></i>
+	<i data-feather="check" id="done" onclick="completedBook(${booksObject.id})"></i>
 	<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
 	`;
 	book.append(bookTitle, bookAuthor, bookYear, icon);
@@ -97,6 +97,15 @@ document.addEventListener(RENDER_EVENT, () => {
 		feather.replace();
 	}
 });
+
+function completedBook(id) {
+	for (const book of books) {
+		if (book.id === id) {
+			book.isComplete = true;
+		}
+	}
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
 
 function deleteBook(id) {
 	for (const book of books) {
