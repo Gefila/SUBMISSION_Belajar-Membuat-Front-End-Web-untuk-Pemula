@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+	feather.replace();
+
 	const inputBook = document.getElementById("inputBook");
 	inputBook.addEventListener("submit", (e) => {
 		e.preventDefault();
 		addTodo();
+		feather.replace();
 	});
 });
 
@@ -53,9 +56,7 @@ function showBooks(booksObject) {
 	const bookTitle = document.createElement("h1");
 	bookTitle.classList.add("book-title");
 	bookTitle.innerText = booksObject.title;
-	bookTitle.addEventListener("click", () => {
-		deleteBook(booksObject.id);
-	});
+	bookTitle.addEventListener("click", () => {});
 
 	const bookAuthor = document.createElement("div");
 	bookAuthor.classList.add("book-author");
@@ -65,8 +66,14 @@ function showBooks(booksObject) {
 	bookYear.classList.add("book-author");
 	bookYear.innerText = booksObject.year;
 
-	book.append(bookTitle, bookAuthor, bookYear);
-	bookWrapper.append(book);
+	const icon = document.createElement("div");
+	icon.innerHTML = `
+	<i data-feather="repeat" id=""></i>
+	<i data-feather="check" id="done"></i>
+	<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
+	`;
+	book.append(bookTitle, bookAuthor, bookYear, icon);
+	bookWrapper.appendChild(book);
 
 	return bookWrapper;
 }
@@ -87,6 +94,7 @@ document.addEventListener(RENDER_EVENT, () => {
 		if (book.isComplete) {
 			completeBookShelfList.append(bookElement);
 		} else inCompleteBookShelfList.append(bookElement);
+		feather.replace();
 	}
 });
 
@@ -108,4 +116,3 @@ function getIndex(id) {
 		}
 	}
 }
-
