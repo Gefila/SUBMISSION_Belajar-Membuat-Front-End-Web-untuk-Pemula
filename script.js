@@ -74,8 +74,15 @@ document.addEventListener(RENDER_EVENT, () => {
 	);
 	inCompleteBookShelfList.innerHTML = "";
 
+	const completeBookShelfList = document.getElementById(
+		"completeBookShelfList"
+	);
+	completeBookShelfList.innerHTML = "";
+
 	for (const book of books) {
 		const bookElement = showBooks(book);
-		inCompleteBookShelfList.append(bookElement);
+		if (book.isComplete) {
+			completeBookShelfList.append(bookElement);
+		} else inCompleteBookShelfList.append(bookElement);
 	}
 });

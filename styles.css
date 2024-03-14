@@ -64,7 +64,8 @@ main {
 }
 
 .book-shelf,
-#inCompleteBookShelfList {
+#inCompleteBookShelfList,
+#completeBookShelfList {
 	background-color: antiquewhite;
 	display: flex;
 	flex-wrap: wrap;
