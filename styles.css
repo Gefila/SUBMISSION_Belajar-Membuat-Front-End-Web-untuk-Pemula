@@ -81,4 +81,16 @@ main {
 .book {
 	padding: 2rem;
 	background-color: rgb(187, 187, 187);
+	position: relative;
 }
+
+/* .book-wrapper .icon {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 10;
+}
+
+.book-wrapper .icon > * {
+	cursor: pointer;
+} */

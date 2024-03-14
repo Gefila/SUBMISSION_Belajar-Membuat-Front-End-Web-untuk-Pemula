@@ -53,6 +53,9 @@ function showBooks(booksObject) {
 	const bookTitle = document.createElement("h1");
 	bookTitle.classList.add("book-title");
 	bookTitle.innerText = booksObject.title;
+	bookTitle.addEventListener("click", () => {
+		deleteBook(booksObject.id);
+	});
 
 	const bookAuthor = document.createElement("div");
 	bookAuthor.classList.add("book-author");
@@ -86,3 +89,23 @@ document.addEventListener(RENDER_EVENT, () => {
 		} else inCompleteBookShelfList.append(bookElement);
 	}
 });
+
+function deleteBook(id) {
+	for (const book of books) {
+		if (book.id === id) {
+			const index = getIndex(id);
+			books.splice(index, 1);
+		}
+	}
+
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function getIndex(id) {
+	for (const index in books) {
+		if (books[index].id === id) {
+			return index;
+		}
+	}
+}
+
