@@ -4,8 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	const inputBook = document.getElementById("inputBook");
 	inputBook.addEventListener("submit", (e) => {
 		e.preventDefault();
-		addTodo();
 		feather.replace();
+
+		const submit = document.getElementById("book-submit").innerText;
+		if (submit != "edit") {
+			addTodo();
+		}
 	});
 });
 
@@ -67,11 +71,20 @@ function showBooks(booksObject) {
 	bookYear.innerText = booksObject.year;
 
 	const icon = document.createElement("div");
-	icon.innerHTML = `
-	<i data-feather="repeat" id=""></i>
-	<i data-feather="check" id="done" onclick="completedBook(${booksObject.id})"></i>
-	<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
-	`;
+	if (booksObject.isComplete) {
+		icon.innerHTML = `
+		<i data-feather="repeat" id="repeat" onclick="repeatBook(${booksObject.id})"></i>
+		<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
+		<i data-feather="edit" id="edit" onclick="edit(${booksObject.id})"></i>
+		`;
+	} else {
+		icon.innerHTML = `
+		<i data-feather="check" id="done" onclick="completedBook(${booksObject.id})"></i>
+		<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
+		<i data-feather="edit" id="edit" onclick="edit(${booksObject.id})"></i>
+		`;
+	}
+
 	book.append(bookTitle, bookAuthor, bookYear, icon);
 	bookWrapper.appendChild(book);
 
@@ -107,6 +120,15 @@ function completedBook(id) {
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
+function repeatBook(id) {
+	for (const book of books) {
+		if (book.id === id) {
+			book.isComplete = false;
+		}
+	}
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
 function deleteBook(id) {
 	for (const book of books) {
 		if (book.id === id) {
@@ -122,6 +144,32 @@ function getIndex(id) {
 	for (const index in books) {
 		if (books[index].id === id) {
 			return index;
+		}
+	}
+}
+
+function edit(id) {
+	for (const book of books) {
+		if (book.id === id) {
+			let bookTitle = document.getElementById("input-judul");
+			bookTitle.value = book.title;
+			let bookAuthor = document.getElementById("input-penulis");
+			bookAuthor.value = book.author;
+			let bookYear = document.getElementById("input-tahun");
+			bookYear.value = book.year;
+			let bookIsComplete = document.getElementById("done");
+			bookIsComplete.checked = book.isComplete;
+			let submit = (document.getElementById("book-submit").innerText = "edit");
+
+			const inputBook = document.getElementById("inputBook");
+			inputBook.addEventListener("submit", (e) => {
+				e.preventDefault();
+				book.title = bookTitle.value;
+				book.author = bookAuthor.value;
+				book.year = bookYear.value;
+				book.isComplete = bookIsComplete.checked;
+				document.dispatchEvent(new Event(RENDER_EVENT));
+			});
 		}
 	}
 }
