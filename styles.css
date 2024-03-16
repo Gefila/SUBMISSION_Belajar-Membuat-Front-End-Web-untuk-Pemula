@@ -75,7 +75,6 @@ main {
 
 .book-wrapper {
 	padding: 1rem;
-	width: 50%;
 }
 
 .book {
@@ -84,13 +83,6 @@ main {
 	position: relative;
 }
 
-/* .book-wrapper .icon {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	z-index: 10;
+.hidden {
+	display: none;
 }
-
-.book-wrapper .icon > * {
-	cursor: pointer;
-} */

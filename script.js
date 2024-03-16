@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			addTodo();
 			inputBook.reset();
 		} else {
-			replace(bookz);
+			replace(bookEdit);
 			inputBook.reset();
 		}
 		e.preventDefault();
@@ -66,7 +66,6 @@ function showBooks(booksObject) {
 	const bookTitle = document.createElement("h1");
 	bookTitle.classList.add("book-title");
 	bookTitle.innerText = booksObject.title;
-	bookTitle.addEventListener("click", () => {});
 
 	const bookAuthor = document.createElement("div");
 	bookAuthor.classList.add("book-author");
@@ -154,6 +153,7 @@ function getIndex(id) {
 		}
 	}
 }
+
 let bookEdit;
 
 function editForm(id) {
@@ -200,4 +200,24 @@ function load() {
 	}
 
 	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+//FITUR SEARCH
+
+const searchBox = document.getElementById("search");
+searchBox.addEventListener("input", (e) => {
+	let value = searchBox.value.toLowerCase();
+	search(value);
+});
+
+function search(searchInput) {
+	const bookItems = document.getElementsByClassName("book-wrapper");
+	for (let i = 0; i < bookItems.length; i++) {
+		const itemTitle = bookItems[i].querySelector(".book-title");
+		if (itemTitle.textContent.toLowerCase().includes(searchInput)) {
+			bookItems[i].classList.remove("hidden");
+		} else {
+			bookItems[i].classList.add("hidden");
+		}
+	}
 }
