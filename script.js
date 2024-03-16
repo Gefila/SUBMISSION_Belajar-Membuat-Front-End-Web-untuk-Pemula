@@ -1,20 +1,25 @@
+const books = [];
+const RENDER_EVENT = "render-books";
+
 document.addEventListener("DOMContentLoaded", () => {
 	feather.replace();
+	load();
 
 	const inputBook = document.getElementById("inputBook");
 	inputBook.addEventListener("submit", (e) => {
-		e.preventDefault();
 		feather.replace();
 
 		const submit = document.getElementById("book-submit").innerText;
-		if (submit != "edit") {
+		if (submit != "EDIT") {
 			addTodo();
+			inputBook.reset();
+		} else {
+			replace(bookz);
+			inputBook.reset();
 		}
+		e.preventDefault();
 	});
 });
-
-const books = [];
-const RENDER_EVENT = "render-books";
 
 function addTodo() {
 	const bookTitle = document.getElementById("input-judul").value;
@@ -33,6 +38,7 @@ function addTodo() {
 
 	books.push(bookObject);
 
+	save();
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -75,13 +81,13 @@ function showBooks(booksObject) {
 		icon.innerHTML = `
 		<i data-feather="repeat" id="repeat" onclick="repeatBook(${booksObject.id})"></i>
 		<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
-		<i data-feather="edit" id="edit" onclick="edit(${booksObject.id})"></i>
+		<i data-feather="edit" id="edit" onclick="editForm(${booksObject.id})"></i>
 		`;
 	} else {
 		icon.innerHTML = `
 		<i data-feather="check" id="done" onclick="completedBook(${booksObject.id})"></i>
 		<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
-		<i data-feather="edit" id="edit" onclick="edit(${booksObject.id})"></i>
+		<i data-feather="edit" id="edit" onclick="editForm(${booksObject.id})"></i>
 		`;
 	}
 
@@ -126,6 +132,7 @@ function repeatBook(id) {
 			book.isComplete = false;
 		}
 	}
+	save();
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -136,7 +143,7 @@ function deleteBook(id) {
 			books.splice(index, 1);
 		}
 	}
-
+	save();
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -147,29 +154,50 @@ function getIndex(id) {
 		}
 	}
 }
+let bookEdit;
 
-function edit(id) {
-	for (const book of books) {
-		if (book.id === id) {
-			let bookTitle = document.getElementById("input-judul");
-			bookTitle.value = book.title;
-			let bookAuthor = document.getElementById("input-penulis");
-			bookAuthor.value = book.author;
-			let bookYear = document.getElementById("input-tahun");
-			bookYear.value = book.year;
-			let bookIsComplete = document.getElementById("done");
-			bookIsComplete.checked = book.isComplete;
-			let submit = (document.getElementById("book-submit").innerText = "edit");
+function editForm(id) {
+	const index = getIndex(id);
+	bookEdit = books[index];
 
-			const inputBook = document.getElementById("inputBook");
-			inputBook.addEventListener("submit", (e) => {
-				e.preventDefault();
-				book.title = bookTitle.value;
-				book.author = bookAuthor.value;
-				book.year = bookYear.value;
-				book.isComplete = bookIsComplete.checked;
-				document.dispatchEvent(new Event(RENDER_EVENT));
-			});
+	let bookTitle = (document.getElementById("input-judul").value =
+		bookEdit.title);
+	let bookAuthor = (document.getElementById("input-penulis").value =
+		bookEdit.author);
+	let bookYear = (document.getElementById("input-tahun").value = bookEdit.year);
+	let bookIsComplete = (document.getElementById("done").checked =
+		bookEdit.isComplete);
+
+	let button = (document.getElementById("book-submit").innerHTML = "EDIT");
+}
+
+function replace(book) {
+	let bookTitle = document.getElementById("input-judul").value;
+	let bookAuthor = document.getElementById("input-penulis").value;
+	let bookYear = document.getElementById("input-tahun").value;
+	let bookIsComplete = document.getElementById("done").checked;
+
+	book.title = bookTitle;
+	book.author = bookAuthor;
+	book.year = bookYear;
+	book.isComplete = bookIsComplete;
+
+	save();
+	let button = (document.getElementById("book-submit").innerHTML = "TAMBAH");
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function save() {
+	localStorage.setItem("data", JSON.stringify(books));
+}
+
+function load() {
+	const local = JSON.parse(localStorage.getItem("data"));
+	if (local !== null) {
+		for (const book of local) {
+			books.push(book);
 		}
 	}
+
+	document.dispatchEvent(new Event(RENDER_EVENT));
 }
