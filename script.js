@@ -78,13 +78,13 @@ function makeBooks(booksObject) {
 	const icon = document.createElement("div");
 	if (booksObject.isComplete) {
 		icon.innerHTML = `
-		<i data-feather="repeat" id="repeat" onclick="repeatBook(${booksObject.id})"></i>
+		<i data-feather="repeat" id="repeat" onclick="undoBookFromCompleted(${booksObject.id})"></i>
 		<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
 		<i data-feather="edit" id="edit" onclick="editForm(${booksObject.id})"></i>
 		`;
 	} else {
 		icon.innerHTML = `
-		<i data-feather="check" id="done" onclick="completedBook(${booksObject.id})"></i>
+		<i data-feather="check" id="done" onclick="addBookToCompleted(${booksObject.id})"></i>
 		<i data-feather="trash-2" id="delete" onclick="deleteBook(${booksObject.id})"></i>
 		<i data-feather="edit" id="edit" onclick="editForm(${booksObject.id})"></i>
 		`;
@@ -125,42 +125,37 @@ function findBook(bookId) {
 	return null;
 }
 
-function completedBook(id) {
-	for (const book of books) {
-		if (book.id === id) {
-			book.isComplete = true;
-		}
-	}
-	document.dispatchEvent(new Event(RENDER_EVENT));
-}
-
-function repeatBook(id) {
-	for (const book of books) {
-		if (book.id === id) {
-			book.isComplete = false;
-		}
-	}
-	save();
-	document.dispatchEvent(new Event(RENDER_EVENT));
-}
-
-function deleteBook(id) {
-	for (const book of books) {
-		if (book.id === id) {
-			const index = getIndex(id);
-			books.splice(index, 1);
-		}
-	}
-	save();
-	document.dispatchEvent(new Event(RENDER_EVENT));
-}
-
 function getIndex(id) {
 	for (const index in books) {
 		if (books[index].id === id) {
 			return index;
 		}
 	}
+	return -1;
+}
+
+function addBookToCompleted(id) {
+	const bookTarget = findBook(id);
+	if (bookTarget == null) return;
+	bookTarget.isComplete = true;
+	save();
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function undoBookFromCompleted(id) {
+	const bookTarget = findBook(id);
+	if (bookTarget == null) return;
+	bookTarget.isComplete = false;
+	save();
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function deleteBook(id) {
+	const index = getIndex(id);
+	books.splice(index, 1);
+	if (index === -1) return;
+	save();
+	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
 let bookEdit;
