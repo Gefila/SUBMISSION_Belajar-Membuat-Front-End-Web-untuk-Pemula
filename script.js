@@ -1,9 +1,10 @@
 const books = [];
 const RENDER_EVENT = "render-books";
+let edit = false;
 
 document.addEventListener("DOMContentLoaded", () => {
 	feather.replace();
-	load();
+	loadFromLocal();
 
 	const inputBook = document.getElementById("inputBook");
 	inputBook.addEventListener("submit", (e) => {
@@ -15,9 +16,21 @@ document.addEventListener("DOMContentLoaded", () => {
 			inputBook.reset();
 		} else {
 			replace(bookEdit);
+			edit = false;
 			inputBook.reset();
 		}
 		e.preventDefault();
+	});
+	let button = document.getElementById("book-submit");
+	const checkbox = document.getElementById("done");
+	checkbox.addEventListener("change", () => {
+		if (!edit) {
+			if (checkbox.checked) {
+				button.innerText = "selesai dibaca";
+			} else {
+				button.innerText = "belum selesai dibaca";
+			}
+		}
 	});
 });
 
@@ -161,6 +174,7 @@ function deleteBook(id) {
 let bookEdit;
 
 function editForm(id) {
+	edit = true;
 	const index = getIndex(id);
 	bookEdit = books[index];
 
@@ -205,7 +219,7 @@ function saveToLocal() {
 	}
 }
 
-function load() {
+function loadFromLocal() {
 	const local = JSON.parse(localStorage.getItem("BOOK"));
 	if (local !== null) {
 		for (const book of local) {
