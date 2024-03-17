@@ -56,7 +56,7 @@ function generateBookObject(id, title, author, year, isComplete) {
 	};
 }
 
-function showBooks(booksObject) {
+function makeBooks(booksObject) {
 	const bookWrapper = document.createElement("div");
 	bookWrapper.classList.add("book-wrapper");
 
@@ -108,13 +108,22 @@ document.addEventListener(RENDER_EVENT, () => {
 	completeBookShelfList.innerHTML = "";
 
 	for (const book of books) {
-		const bookElement = showBooks(book);
+		const bookElement = makeBooks(book);
 		if (book.isComplete) {
 			completeBookShelfList.append(bookElement);
 		} else inCompleteBookShelfList.append(bookElement);
 		feather.replace();
 	}
 });
+
+function findBook(bookId) {
+	for (const book of books) {
+		if (book.id === bookId) {
+			return book;
+		}
+	}
+	return null;
+}
 
 function completedBook(id) {
 	for (const book of books) {
@@ -188,11 +197,11 @@ function replace(book) {
 }
 
 function save() {
-	localStorage.setItem("data", JSON.stringify(books));
+	localStorage.setItem("BOOK", JSON.stringify(books));
 }
 
 function load() {
-	const local = JSON.parse(localStorage.getItem("data"));
+	const local = JSON.parse(localStorage.getItem("BOOK"));
 	if (local !== null) {
 		for (const book of local) {
 			books.push(book);

@@ -86,3 +86,9 @@ main {
 .hidden {
 	display: none;
 }
+
+.search-bar {
+	background-color: rgb(250, 189, 109);
+	display: flex;
+	flex-direction: column;
+}
