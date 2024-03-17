@@ -38,7 +38,7 @@ function addTodo() {
 
 	books.push(bookObject);
 
-	save();
+	saveToLocal();
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -138,7 +138,7 @@ function addBookToCompleted(id) {
 	const bookTarget = findBook(id);
 	if (bookTarget == null) return;
 	bookTarget.isComplete = true;
-	save();
+	saveToLocal();
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -146,7 +146,7 @@ function undoBookFromCompleted(id) {
 	const bookTarget = findBook(id);
 	if (bookTarget == null) return;
 	bookTarget.isComplete = false;
-	save();
+	saveToLocal();
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -154,7 +154,7 @@ function deleteBook(id) {
 	const index = getIndex(id);
 	books.splice(index, 1);
 	if (index === -1) return;
-	save();
+	saveToLocal();
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
@@ -186,13 +186,23 @@ function replace(book) {
 	book.year = bookYear;
 	book.isComplete = bookIsComplete;
 
-	save();
+	saveToLocal();
 	let button = (document.getElementById("book-submit").innerHTML = "TAMBAH");
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
-function save() {
-	localStorage.setItem("BOOK", JSON.stringify(books));
+function isStorageExist() {
+	if (typeof Storage === undefined) {
+		alert("Browser kamu tidak mendukung local storage");
+		return false;
+	}
+	return true;
+}
+
+function saveToLocal() {
+	if (isStorageExist()) {
+		localStorage.setItem("BOOK", JSON.stringify(books));
+	}
 }
 
 function load() {
