@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		const submit = document.getElementById("book-submit").innerText;
 		if (submit != "EDIT") {
-			addTodo();
+			addBook();
 			inputBook.reset();
 		} else {
 			replace(bookEdit);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 });
 
-function addTodo() {
+function addBook() {
 	const bookTitle = document.getElementById("input-judul").value;
 	const bookAuthor = document.getElementById("input-penulis").value;
 	const bookYear = parseInt(document.getElementById("input-tahun").value);

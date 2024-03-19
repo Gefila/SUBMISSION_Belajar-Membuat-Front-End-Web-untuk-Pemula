@@ -12,8 +12,13 @@ header {
 }
 
 main {
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
+	display: flex;
+}
+
+.input-search-wrapper {
+	height: 80%;
 }
 
 .input-section {
@@ -71,6 +76,12 @@ main {
 	flex-wrap: wrap;
 	padding: 1rem;
 	width: 100%;
+	height: 100%;
+}
+
+#inCompleteBookShelfList,
+#completeBookShelfList {
+	overflow: auto;
 }
 
 .book-wrapper {
@@ -91,4 +102,10 @@ main {
 	background-color: rgb(250, 189, 109);
 	display: flex;
 	flex-direction: column;
+}
+
+.wrapper-bookshelf {
+	display: flex;
+	flex-direction: row;
+	height: 80%;
 }

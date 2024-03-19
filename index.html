@@ -18,43 +18,50 @@
 			<h1>Bookshelf Apps</h1>
 		</header>
 		<main>
-			<section class="input-section" id="input">
-				<div class="title">Masukkan Buku Baru</div>
-				<form id="inputBook">
-					<div class="input">
-						<label for="input-judul">Judul</label>
-						<input type="text" id="input-judul" required />
-					</div>
-					<div class="input">
-						<label for="input-penulis">Penulis</label>
-						<input type="text" id="input-penulis" required />
-					</div>
-					<div class="input">
-						<label for="input-tahun">Tahun</label>
-						<input type="number" id="input-tahun" required min="0" />
-					</div>
-					<div class="input-inline">
-						<label for="done">Tandai selesai dibaca</label>
-						<input type="checkbox" id="done" />
-					</div>
-					<button id="book-submit" type="submit">
-						Masukkan buku ke rak belum selesai dibaca
-					</button>
-				</form>
-			</section>
-			<section class="search-bar">
-				<label for="search">CARI BUKU</label>
-				<input type="search" id="search" />
-				<div class="searched"></div>
-			</section>
-			<section class="book-shelf">
-				<div class="title">Belum selesai dibaca</div>
-				<div id="inCompleteBookShelfList"></div>
-			</section>
-			<section class="book-shelf">
-				<div class="title">Selesai dibaca</div>
-				<div id="completeBookShelfList"></div>
-			</section>
+			<div class="input-search-wrapper">
+				<section class="input-section" id="input">
+					<div class="title">Masukkan Buku Baru</div>
+					<form id="inputBook">
+						<div class="input">
+							<label for="input-judul">Judul</label>
+							<input type="text" id="input-judul" required />
+						</div>
+						<div class="input">
+							<label for="input-penulis">Penulis</label>
+							<input type="text" id="input-penulis" required />
+						</div>
+						<div class="input">
+							<label for="input-tahun">Tahun</label>
+							<input
+								type="number"
+								id="input-tahun"
+								required
+								min="0"
+								max="2024"
+							/>
+						</div>
+						<div class="input-inline">
+							<label for="done">Tandai selesai dibaca</label>
+							<input type="checkbox" id="done" />
+						</div>
+						<button id="book-submit" type="submit">belum selesai dibaca</button>
+					</form>
+				</section>
+				<section class="search-bar">
+					<label for="search">CARI BUKU</label>
+					<input type="search" id="search" />
+				</section>
+			</div>
+			<div class="wrapper-bookshelf">
+				<section class="book-shelf">
+					<div class="title">Belum selesai dibaca</div>
+					<div id="inCompleteBookShelfList"></div>
+				</section>
+				<section class="book-shelf">
+					<div class="title">Selesai dibaca</div>
+					<div id="completeBookShelfList"></div>
+				</section>
+			</div>
 		</main>
 		<script src="script.js"></script>
 	</body>
