@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const submit = document.getElementById("book-submit").innerText;
 		if (submit != "EDIT") {
 			addBook();
+			submit = "belum selesai dibaca";
 			inputBook.reset();
 		} else {
 			replace(bookEdit);
@@ -201,7 +202,7 @@ function replace(book) {
 
 	book.title = bookTitle;
 	book.author = bookAuthor;
-	book.year = bookYear;
+	book.year = parseInt(bookYear);
 	book.isComplete = bookIsComplete;
 
 	saveToLocal();
