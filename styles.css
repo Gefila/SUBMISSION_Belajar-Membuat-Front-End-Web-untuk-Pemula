@@ -5,107 +5,92 @@
 	font-family: poppins;
 }
 
+body {
+	background-color: #070f2b;
+}
+
 header {
 	display: flex;
 	justify-content: center;
-	padding: 1.5rem;
+	padding: 1rem;
+	background-color: #9290c3;
+	color: #070f2b;
+	margin-bottom: 1rem;
 }
 
 main {
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 	display: flex;
+	background-color: #9290c3;
+	padding: 0.5rem;
 }
 
 .input-search-wrapper {
-	height: 80%;
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	padding: 1rem;
+	background-color: #535c91;
+	border-radius: 0.3rem;
+	color: white;
 }
 
 .input-section {
 	display: flex;
 	flex-direction: column;
-	background-color: burlywood;
-	padding: 1rem;
-}
-
-.input-section form {
-	display: flex;
-	flex-direction: column;
+	width: 100%;
 }
 
 .input-section .title {
 	text-align: center;
+	font-weight: 600;
+	margin-bottom: 0.8rem;
 }
 
-.input-section form .input {
+.input-section #inputBook {
 	display: flex;
 	flex-direction: column;
-	padding: 0.5rem 0;
 }
 
-.input-section form .input input {
+.input-section #inputBook .input {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0.6rem;
+}
+
+.input-section #inputBook .input label {
+	color: white;
+	font-weight: 500;
+	font-size: 1rem;
+	padding: 0.1rem 0;
+}
+
+.input-section #inputBook .input input {
 	border: none;
-	padding: 0.5rem 0.2rem;
+	padding: 0.3rem 0.2rem;
+	border-radius: 0.3rem;
 }
 
-.input-section form .input-inline {
+.input-section #inputBook .input-inline {
 	display: flex;
 	align-items: center;
+	padding: 0.4rem 0;
 }
 
-.input-section form .input-inline input {
-	width: 1rem;
-	height: 1rem;
+.input-section #inputBook .input-inline input {
 	margin-left: 1rem;
+	height: 1rem;
+	width: 1rem;
 }
 
-.input-section form button {
-	margin-top: 1rem;
-	padding: 0.5rem 0.3rem;
-	width: 40%;
+.input-section #book-submit {
+	padding: 0.5rem 0.2rem;
+	font-weight: bold;
+	border: none;
+	border-radius: 0.3rem;
+	width: 50%;
 	align-self: center;
-	background-color: blue;
-	border: 0;
-}
-
-.book-shelf,
-#inCompleteBookShelfList,
-#completeBookShelfList {
-	background-color: antiquewhite;
-	display: flex;
-	flex-wrap: wrap;
-	padding: 1rem;
-	width: 100%;
-	height: 100%;
-}
-
-#inCompleteBookShelfList,
-#completeBookShelfList {
-	overflow: auto;
-}
-
-.book-wrapper {
-	padding: 1rem;
-}
-
-.book {
-	padding: 2rem;
-	background-color: rgb(187, 187, 187);
-	position: relative;
-}
-
-.hidden {
-	display: none;
-}
-
-.search-bar {
-	background-color: rgb(250, 189, 109);
-	display: flex;
-	flex-direction: column;
-}
-
-.wrapper-bookshelf {
-	display: flex;
-	flex-direction: row;
-	height: 80%;
+	margin-top: 0.5rem;
+	color: #070f2b;
 }
