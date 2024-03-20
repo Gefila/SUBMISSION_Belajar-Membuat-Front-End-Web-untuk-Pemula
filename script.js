@@ -85,10 +85,12 @@ function makeBooks(booksObject) {
 	bookAuthor.innerText = booksObject.author;
 
 	const bookYear = document.createElement("div");
-	bookYear.classList.add("book-author");
+	bookYear.classList.add("book-year");
 	bookYear.innerText = booksObject.year;
 
 	const icon = document.createElement("div");
+	icon.classList.add("icon-wrapper");
+
 	if (booksObject.isComplete) {
 		icon.innerHTML = `
 		<i data-feather="repeat" id="repeat" onclick="undoBookFromCompleted(${booksObject.id})"></i>
