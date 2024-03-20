@@ -82,7 +82,7 @@ function makeBooks(booksObject) {
 
 	const bookAuthor = document.createElement("div");
 	bookAuthor.classList.add("book-author");
-	bookAuthor.innerText = booksObject.author;
+	bookAuthor.innerText = `Author : ${booksObject.author}`;
 
 	const bookYear = document.createElement("div");
 	bookYear.classList.add("book-year");
@@ -166,11 +166,13 @@ function undoBookFromCompleted(id) {
 }
 
 function deleteBook(id) {
-	const index = getIndex(id);
-	books.splice(index, 1);
-	if (index === -1) return;
-	saveToLocal();
-	document.dispatchEvent(new Event(RENDER_EVENT));
+	if (confirm("Hapus Buku ?")) {
+		const index = getIndex(id);
+		books.splice(index, 1);
+		if (index === -1) return;
+		saveToLocal();
+		document.dispatchEvent(new Event(RENDER_EVENT));
+	}
 }
 
 let bookEdit;
@@ -203,7 +205,8 @@ function replace(book) {
 	book.isComplete = bookIsComplete;
 
 	saveToLocal();
-	let button = (document.getElementById("book-submit").innerHTML = "TAMBAH");
+	let button = (document.getElementById("book-submit").innerHTML =
+		"belum selesai dibaca");
 	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 

@@ -42,7 +42,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	background-color: #535c91;
 	padding: 1rem;
 }
@@ -108,6 +108,7 @@ main {
 }
 
 .search-bar {
+	height: 10%;
 	background-color: #1b1a55;
 	padding: 0.5rem;
 	display: flex;
@@ -188,4 +189,38 @@ main {
 
 .hidden {
 	display: none;
+}
+
+/* RESPONSIVE */
+
+/* TABLET */
+@media (max-width: 768px) {
+	html {
+		font-size: 80%;
+	}
+
+	main {
+		flex-direction: column;
+		width: 100%;
+		height: auto;
+	}
+
+	.input-search-wrapper {
+		width: 100%;
+	}
+
+	.wrapper-bookshelf {
+		flex-direction: column;
+		width: 100%;
+		padding-left: 0;
+	}
+
+	.wrapper-bookshelf .book-shelf {
+		width: 100%;
+		overflow: visible;
+	}
+
+	.book-wrapper {
+		margin-bottom: 4rem;
+	}
 }
